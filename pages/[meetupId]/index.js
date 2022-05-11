@@ -30,7 +30,7 @@ export async function getStaticPaths (){
   const meetups= await meetupsCollection.find({},{_id:1}).toArray(); 
   client.close() 
   return { 
-    fallback:false, // allows to pre-generate pages .
+    fallback:'blocking', // will prevent fallback false and allow us to a neww pages . it you set fallback to false that means the meetup page is build in the inital phase and cannot be added later .
     paths: meetups.map(meetup=>({
       params:{meetupId:meetup._id.toString()},
     }))
